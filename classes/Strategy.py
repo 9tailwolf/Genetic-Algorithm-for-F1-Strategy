@@ -127,8 +127,7 @@ class Strategy:
             else:
                 self.add_pitstop()
 
-        self.fuel += random.randint(-1,1)
-        self.fuel = min(max(self.fuel,fuel_range[0]),fuel_range[1])
+        self.fuel = random.randint(fuel_range[0],fuel_range[1])
 
         random.shuffle(self.tire)
         self.update_encoded_strategy()
