@@ -13,6 +13,20 @@ If you want to change condition for find strategy, you should type below.
 python main.py --circuit='Bahrain' --initial_population_size=100 --pit_time=60 --max_pitstop=4 --selection_size=20 --crossover_size=40 --mutation_size=40 --iteration=100 --result_size=30
 ```
 
+You can edit regression setup by
+
+```bash
+python main.py --change=True
+```
+
+Below is a option of setup.
+- Laptime loss per fuel
+- Correction of wear in regression
+- Correction of ideal tire in regression
+- Tire wear limitation
+- Tire performance when limitation
+
+
 The circuit that you can input.
 - Bahrain
 - Montreal
@@ -28,3 +42,7 @@ You need below library to run without error.
 - random
 - argparse
 - time
+
+
+I refered below paper.
+[Paper](https://dl.acm.org/doi/10.1145/3583133.3596349)
