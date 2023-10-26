@@ -68,9 +68,9 @@ def data_reader():
 
 def data_writer():
     setup = data_reader()
-    time_per_fuel = int(input('Type time per fuel (Initial : 30, Current : ' + str(setup['time_per_fuel'])+ '): '))
-    correction_wear = int(input('Type size of correction wear (Initial : 5, Current : ' + str(setup['correction_wear']) + '): '))
-    correction_ideal = int(input('Type size of correction ideal (Initial : 3, Current : ' + str(setup['correction_ideal']) + '): '))
+    time_per_fuel = int(input('Type laptime loss per fuel (Initial : 30, Current : ' + str(setup['time_per_fuel'])+ '): '))
+    correction_wear = int(input('Type size of correction wear in regression (Initial : 5, Current : ' + str(setup['correction_wear']) + '): '))
+    correction_ideal = int(input('Type size of correction ideal tire in regression (Initial : 3, Current : ' + str(setup['correction_ideal']) + '): '))
     wear_limit = int(input('Type limitation of wear (Initial : 40, Current : ' + str(setup['wear_limit']) + '): '))
     wear_limit_performance = int(input('Type tire performance when limitation (Initial : 92, Current : ' + str(setup['wear_limit_performance']) + '): '))
 
