@@ -1,4 +1,5 @@
 from classes.Regression import Regression
+from classes.DataGenerator import data_reader
 
 class Laptime:
     def __init__(self,path:str,compound:str):
@@ -27,12 +28,12 @@ class Laptime:
     def getlaptime_tire(self,age,fuel_usage):
         return self.a * age**3 + self.b * age**2 + self.c * age + self.d + self.e * (fuel_usage-self.minimum_fuel)
 
-    def getlaptime_fuel(self,fuel,time_per_fuel = 30):
+    def getlaptime_fuel(self,fuel,time_per_fuel):
         return fuel * time_per_fuel
 
-    def getlaptime(self,age,fuel,fuel_usage):
+    def getlaptime(self,age,fuel,fuel_usage,time_per_fuel):
         if self.a:
-            time = round(int(self.ideal * 100 / self.getlaptime_tire(age,fuel_usage) + self.getlaptime_fuel(fuel))/1000,3)
+            time = round(int(self.ideal * 100 / self.getlaptime_tire(age,fuel_usage) + self.getlaptime_fuel(fuel,time_per_fuel))/1000,3)
             if time>1000 or time<0:
                 return 1000000
             return time
@@ -41,6 +42,7 @@ class Laptime:
 class LaptimeCalculator:
     def __init__(self, path:str):
         self.calculator = [Laptime(path,i) for i in ['Soft','Medium','Hard']]
+        self.time_per_fuel = data_reader()['time_per_fuel']
         for i in self.calculator:
             i.setCoefficient()
 
@@ -48,8 +50,6 @@ class LaptimeCalculator:
         laptimes = 0
         for s in strategy:
             tire,age,fuel,fuel_usage = s
-            t = self.calculator[tire].getlaptime(age,fuel,fuel_usage)
-            #print(s,t)
+            t = self.calculator[tire].getlaptime(age,fuel,fuel_usage,self.time_per_fuel)
             laptimes += t
-        #print(laptimes + pit_time * pitstop,end='\n')
         return laptimes + pit_time * pitstop

@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import json
 
 class DataGenerator:
     def __init__(self,path:str):
@@ -57,5 +58,27 @@ class DataGenerator:
     def data_generator(self,compound):
         data = self.data_processing()
         self.ideal = self.get_ideal(data['Soft'])
-        return self.data_for_regression(self.ideal, data[compound],time_per_fuel=30, correction_wear=3, correction_ideal=5,
-                            wear_limit=40, wear_limit_performance=92)
+        setup = data_reader()
+        return self.data_for_regression(self.ideal, data[compound],time_per_fuel=setup['time_per_fuel'], correction_wear=setup['correction_wear'], correction_ideal=setup['correction_ideal'],
+                            wear_limit=setup['wear_limit'], wear_limit_performance=setup['wear_limit_performance'])
+
+def data_reader():
+    with open('./setup.json', 'r') as f:
+        return json.load(f)
+
+def data_writer():
+    setup = data_reader()
+    time_per_fuel = int(input('Type time per fuel (Initial : 30, Current : ' + str(setup['time_per_fuel'])+ '): '))
+    correction_wear = int(input('Type size of correction wear (Initial : 5, Current : ' + str(setup['correction_wear']) + '): '))
+    correction_ideal = int(input('Type size of correction ideal (Initial : 3, Current : ' + str(setup['correction_ideal']) + '): '))
+    wear_limit = int(input('Type limitation of wear (Initial : 40, Current : ' + str(setup['wear_limit']) + '): '))
+    wear_limit_performance = int(input('Type tire performance when limitation (Initial : 92, Current : ' + str(setup['wear_limit_performance']) + '): '))
+
+    setup['time_per_fuel'] = time_per_fuel
+    setup['correction_wear'] = correction_wear
+    setup['correction_ideal'] = correction_ideal
+    setup['wear_limit'] = wear_limit
+    setup['wear_limit_performance'] = wear_limit_performance
+
+    with open('./setup.json', 'w') as f:
+        json.dump(setup, f, indent='\t')

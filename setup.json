@@ -1,0 +1,7 @@
+{
+	"time_per_fuel": 30,
+	"correction_wear": 5,
+	"correction_ideal": 3,
+	"wear_limit": 40,
+	"wear_limit_performance": 92
+}
