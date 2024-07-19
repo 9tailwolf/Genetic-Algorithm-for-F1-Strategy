@@ -1,5 +1,5 @@
 # Genetic-Algorithm-for-F1-Strategy
-I apply basic genetic algorithm in formula1 to optimize the race strategy with practice session datas.
+I apply basic genetic algorithm in formula1 to optimize the race strategy with practice session data.
 
 When you type below code on your terminal, then the code will be executed.
 
@@ -46,4 +46,4 @@ You need below library to run without error.
 
 I refered [This Paper](https://dl.acm.org/doi/10.1145/3583133.3596349)
 
-For more Information, [Visit HERE](https://9tailwolf.github.io/playground/f1/genetic/)
+For more Information, [Visit HERE](https://9tailwolf.github.io/project/genetic/)
